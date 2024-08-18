@@ -3,6 +3,7 @@ package handler
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 	"strings"
 
 	"kos-barokah-api/features/users"
@@ -23,6 +24,9 @@ func NewHandler(service users.UserServiceInterface /* sci customer.CustomerServi
 		s: service,
 		/*sc:  sci,*/
 		jwt: jwt,
+
+		//review
+		userService: us,
 	}
 }
 
@@ -336,5 +340,44 @@ func (uh *UserHandler) GetProfile() echo.HandlerFunc {
 		}
 
 		return c.JSON(http.StatusOK, helper.FormatResponse(true, "Success fetch data", result))
+	}
+}
+
+// review
+func (uh *UserHandler) GetAllUsers() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		users, err := uh.userService.GetAllUsers()
+		if err != nil {
+			return c.JSON(http.StatusInternalServerError, helper.FormatResponse(false, "Failed to fetch users", nil))
+		}
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, "Successfully fetched users", users))
+	}
+}
+
+func (uh *UserHandler) GetUserByID() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		id, err := strconv.Atoi(c.Param("id"))
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, "Invalid user ID", nil))
+		}
+		user, err := uh.userService.GetUserByID(id)
+		if err != nil {
+			return c.JSON(http.StatusInternalServerError, helper.FormatResponse(false, "User not found", nil))
+		}
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, "Successfully fetched user", user))
+	}
+}
+
+func (uh *UserHandler) DeleteUser() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		id, err := strconv.Atoi(c.Param("id"))
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, "Invalid user ID", nil))
+		}
+		success, err := uh.userService.DeleteUser(id)
+		if err != nil || !success {
+			return c.JSON(http.StatusInternalServerError, helper.FormatResponse(false, "Failed to delete user", nil))
+		}
+		return c.JSON(http.StatusOK, helper.FormatResponse(true, "Successfully deleted user", nil))
 	}
 }

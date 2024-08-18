@@ -243,3 +243,19 @@ func (ud *UserData) DeductPoints(userID int, value int) (bool, error) {
 
 	return true, nil
 }
+
+// review
+func (ud *userData) GetAllUsers() ([]User, error) {
+	var users []User
+	if err := ud.db.Find(&users).Error; err != nil {
+		return nil, err
+	}
+	return users, nil
+}
+
+func (ud *userData) Delete(id int) error {
+	if err := ud.db.Delete(&User{}, id).Error; err != nil {
+		return err
+	}
+	return nil
+}

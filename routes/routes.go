@@ -23,6 +23,11 @@ func RouteUser(e *echo.Group, uh users.UserHandlerInterface, cfg configs.Program
 	// e.POST("/refresh-token", uh.RefreshToken(), echojwt.JWT([]byte(cfg.Secret)))
 	e.PUT("/admin/update", uh.UpdateProfile(), echojwt.JWT([]byte(cfg.Secret)))
 	e.GET("/user/profile", uh.GetProfile(), echojwt.JWT([]byte(cfg.Secret)))
+
+	// review
+	e.GET("/users", uh.GetAllUsers(), echojwt.JWT([]byte(cfg.Secret)))
+	e.GET("/users/:id", uh.GetUserByID(), echojwt.JWT([]byte(cfg.Secret)))
+	e.DELETE("/users/:id", uh.DeleteUser(), echojwt.JWT([]byte(cfg.Secret)))
 }
 
 // func RouteFashion(e *echo.Group, fh fashions.FashionHandlerInterface, cfg configs.ProgrammingConfig) {

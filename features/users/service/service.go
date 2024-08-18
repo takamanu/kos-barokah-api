@@ -289,3 +289,28 @@ func (us *UserService) DeductPoints(userID int, value int) (bool, error) {
 
 	return true, nil
 }
+
+// review
+func (us *UserService) GetAllUsers() ([]users.User, error) {
+	result, err := us.d.GetAllUsers()
+	if err != nil {
+		return nil, errors.New("Failed to get users")
+	}
+	return result, nil
+}
+
+func (us *UserService) GetUserByID(id int) (*users.User, error) {
+	result, err := us.d.GetByID(id)
+	if err != nil {
+		return nil, errors.New("User not found")
+	}
+	return &result, nil
+}
+
+func (us *UserService) DeleteUser(id int) (bool, error) {
+	err := us.d.Delete(id)
+	if err != nil {
+		return false, errors.New("Failed to delete user")
+	}
+	return true, nil
+}

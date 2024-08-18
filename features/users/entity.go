@@ -75,6 +75,11 @@ type UserHandlerInterface interface {
 	UpdateProfile() echo.HandlerFunc
 	RefreshToken() echo.HandlerFunc
 	GetProfile() echo.HandlerFunc
+
+	//review
+	GetAllUsers() echo.HandlerFunc
+	GetUserByID() echo.HandlerFunc
+	DeleteUser() echo.HandlerFunc
 }
 
 type UserServiceInterface interface {
@@ -90,6 +95,11 @@ type UserServiceInterface interface {
 	AddPoints(id int, value int) (bool, error)
 	DeductPoints(id int, value int) (bool, error)
 	GetProfile(id int) (*User, error)
+
+	//review
+	GetAllUsers() ([]User, error)
+	GetUserByID(id int) (*User, error)
+	DeleteUser(id int) (bool, error)
 }
 
 type UserDataInterface interface {
@@ -105,4 +115,8 @@ type UserDataInterface interface {
 	UpdateProfile(id int, newData UpdateProfile) (bool, error)
 	AddPoints(userID int, value int) (bool, error)
 	DeductPoints(userID int, value int) (bool, error)
+
+	//review
+	GetAllUsers() ([]User, error)
+	Delete(id int) error
 }
