@@ -134,40 +134,40 @@ func loadConfig() (*ProgrammingConfig, error) {
 		// permit = false
 		// error = errors.New("BASE_URL undefined")
 	}
-	if val, found := os.LookupEnv("BUCKET_ACCESS_KEY_ID"); found {
-		res.BucketAccessKeyID = val
-	} else {
-		permit = false
-		error = errors.New("Config : Invalid BUCKET ACCESS KEY ID undefined")
-	}
+	// if val, found := os.LookupEnv("BUCKET_ACCESS_KEY_ID"); found {
+	// 	res.BucketAccessKeyID = val
+	// } else {
+	// 	permit = false
+	// 	error = errors.New("Config : Invalid BUCKET ACCESS KEY ID undefined")
+	// }
 
-	if val, found := os.LookupEnv("BUCKET_SECRET_ACCESS_KEY"); found {
-		res.BucketSecretAccessKey = val
-	} else {
-		permit = false
-		error = errors.New("Config : Invalid BUCKET SECRET ACCESS KEY undefined")
-	}
+	// if val, found := os.LookupEnv("BUCKET_SECRET_ACCESS_KEY"); found {
+	// 	res.BucketSecretAccessKey = val
+	// } else {
+	// 	permit = false
+	// 	error = errors.New("Config : Invalid BUCKET SECRET ACCESS KEY undefined")
+	// }
 
-	if val, found := os.LookupEnv("BUCKET_REGION"); found {
-		res.BucketRegion = val
-	} else {
-		permit = false
-		error = errors.New("Config : Invalid BUCKET REGION undefined")
-	}
+	// if val, found := os.LookupEnv("BUCKET_REGION"); found {
+	// 	res.BucketRegion = val
+	// } else {
+	// 	permit = false
+	// 	error = errors.New("Config : Invalid BUCKET REGION undefined")
+	// }
 
-	if val, found := os.LookupEnv("BUCKET_ENDPOINT"); found {
-		res.BucketEndpoint = val
-	} else {
-		permit = false
-		error = errors.New("Config : Invalid BUCKET ENDPOINT undefined")
-	}
+	// if val, found := os.LookupEnv("BUCKET_ENDPOINT"); found {
+	// 	res.BucketEndpoint = val
+	// } else {
+	// 	permit = false
+	// 	error = errors.New("Config : Invalid BUCKET ENDPOINT undefined")
+	// }
 
-	if val, found := os.LookupEnv("BUCKET_NAME"); found {
-		res.BucketName = val
-	} else {
-		permit = false
-		error = errors.New("Config : Invalid BUCKET NAME undefined")
-	}
+	// if val, found := os.LookupEnv("BUCKET_NAME"); found {
+	// 	res.BucketName = val
+	// } else {
+	// 	permit = false
+	// 	error = errors.New("Config : Invalid BUCKET NAME undefined")
+	// }
 
 	if !permit {
 		return nil, error

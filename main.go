@@ -72,7 +72,7 @@ func main() {
 	routes.RouteUser(group, userController, *config)
 	routes.RouteRoom(group, roomController, *config)
 
-	fmt.Println("tes")
+	fmt.Println("JAUS KONTOL")
 
 	e.Logger.Debug(db)
 

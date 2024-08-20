@@ -25,8 +25,7 @@ func NewHandler(service users.UserServiceInterface /* sci customer.CustomerServi
 		/*sc:  sci,*/
 		jwt: jwt,
 
-		//review
-		userService: us,
+		//revie
 	}
 }
 
@@ -346,7 +345,7 @@ func (uh *UserHandler) GetProfile() echo.HandlerFunc {
 // review
 func (uh *UserHandler) GetAllUsers() echo.HandlerFunc {
 	return func(c echo.Context) error {
-		users, err := uh.userService.GetAllUsers()
+		users, err := uh.s.GetAllUsers()
 		if err != nil {
 			return c.JSON(http.StatusInternalServerError, helper.FormatResponse(false, "Failed to fetch users", nil))
 		}
@@ -360,7 +359,7 @@ func (uh *UserHandler) GetUserByID() echo.HandlerFunc {
 		if err != nil {
 			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, "Invalid user ID", nil))
 		}
-		user, err := uh.userService.GetUserByID(id)
+		user, err := uh.s.GetUserByID(id)
 		if err != nil {
 			return c.JSON(http.StatusInternalServerError, helper.FormatResponse(false, "User not found", nil))
 		}
@@ -374,7 +373,7 @@ func (uh *UserHandler) DeleteUser() echo.HandlerFunc {
 		if err != nil {
 			return c.JSON(http.StatusBadRequest, helper.FormatResponse(false, "Invalid user ID", nil))
 		}
-		success, err := uh.userService.DeleteUser(id)
+		success, err := uh.s.DeleteUser(id)
 		if err != nil || !success {
 			return c.JSON(http.StatusInternalServerError, helper.FormatResponse(false, "Failed to delete user", nil))
 		}
